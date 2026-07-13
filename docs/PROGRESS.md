@@ -111,20 +111,37 @@ F111 bundle budget assertion in CI, mobile E2E suite.
 
 Gate: no desktop-specific layout work during this phase. ✅ Held.
 
-## Phase 3 — Mobile stabilization ⬜ NOT STARTED
+## Phase 3 — Mobile stabilization 🟨 AUTOMATED GATE GREEN (2026-07-13); manual device pass outstanding
 
-- [ ] Mobile acceptance criteria complete (all F106–F111 + feature DoD)
-- [ ] Mobile overflow resolved at all F120 mobile widths
-- [ ] Safe-area behaviour verified
-- [ ] Virtual keyboards tested
-- [ ] Avatar minimization verified
-- [ ] Slow-network behaviour validated
-- [ ] Mobile accessibility testing complete
-- [ ] Mobile performance testing complete (F111 budgets)
-- [ ] Complete mobile demo validated
-- [ ] Mobile end-to-end tests green
+Automated suite (runs locally and in CI — `.github/workflows/ci.yml`):
+37 Playwright E2E tests (journey, responsive, resilience, a11y, parity) +
+9 exact-output unit tests for the financial domain engine + bundle budget.
 
-Gate: desktop expansion may not begin until all items pass.
+- [x] Mobile overflow: zero horizontal overflow on all 17 routes × 4 F120
+      mobile widths (320/360/390/412) — automated in responsive.spec.ts
+- [x] Complete mobile demo validated — journey.spec.ts covers sign-in, deep-link
+      gating, More-sheet back behaviour, wealth health, Copilot conversation +
+      persistence, profile step flow with dashboard recalculation, consent
+      withdrawal enforcement, risk questionnaire, sign-out
+- [x] Avatar minimization verified (hide/show in journey E2E)
+- [x] Slow-network + failure behaviour validated — skeletons on delay, explicit
+      error state + working retry on abort, offline banner + Copilot fallback
+- [x] Accessibility (automated floor): axe serious/critical = 0 on all routes;
+      fixed a real contrast violation (--color-positive on primary-soft pills)
+- [x] Performance: F111 bundle budget enforced in CI (33 routes ≤200 kB first
+      load, shared 102 kB ≤150 kB); system fonts, lazy data, no blocking assets
+- [x] Mobile end-to-end tests green (37/37)
+- [x] Parity baseline: exact-output unit tests pin the engine (F004); API
+      determinism + Copilot-quotes-goals-API tests pin cross-surface parity
+- [~] Safe-area behaviour: env() utilities implemented and regression-safe;
+      **manual check on a notched device still required**
+- [~] Virtual keyboards: keyboard-aware sticky actions implemented;
+      **manual check on real iOS/Android keyboards still required**
+- [~] Screen reader: **manual VoiceOver/TalkBack pass still required**
+- [ ] Embedded WebView back-behaviour check in a real banking WebView
+
+Gate: desktop expansion may not begin until all items pass. The four remaining
+items need physical devices — everything automatable is green and enforced.
 
 ## Phase 4 — Responsive and tablet adaptation ⬜ NOT STARTED
 

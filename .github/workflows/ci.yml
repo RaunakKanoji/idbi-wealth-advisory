@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Financial domain unit tests (exact-output parity baseline)
+        run: npm test -w @idbi/financial-domain
+
+      - name: Build with bundle budget (F111)
+        run: npm run build:budget -w @idbi/banking
+
+      - name: Install Playwright browser
+        working-directory: apps/banking
+        run: npx playwright install --with-deps chromium
+
+      - name: Mobile E2E, a11y, responsive, and resilience suites
+        working-directory: apps/banking
+        run: npx playwright test
+        env:
+          CI: "true"

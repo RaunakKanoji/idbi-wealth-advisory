@@ -4,5 +4,13 @@
   "private": true,
   "main": "src/index.ts",
   "types": "src/index.ts",
-  "dependencies": { "@idbi/types": "*" }
+  "dependencies": {
+    "@idbi/types": "*"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.10"
+  },
+  "scripts": {
+    "test": "vitest run"
+  }
 }

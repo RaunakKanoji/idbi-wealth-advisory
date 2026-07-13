@@ -61,15 +61,18 @@ export function FinancialProfileFlow() {
     track(ANALYTICS_EVENTS.formStarted, { form: "financial_profile" });
   }, []);
 
-  // Prefill from the current profile the first time (no saved draft).
+  // Prefill from the current profile, merging per field so anything the
+  // customer has already typed (or a saved draft) always wins over the server.
   useEffect(() => {
     if (!profileData) return;
-    try {
-      if (window.localStorage.getItem(DRAFT_KEY)) return;
-    } catch {
-      // fall through to prefill
-    }
-    setDraft(profileData.data.profile);
+    const server = profileData.data.profile;
+    setDraft((d) => ({
+      monthlyIncome: d.monthlyIncome ?? server.monthlyIncome,
+      monthlyExpenses: d.monthlyExpenses ?? server.monthlyExpenses,
+      monthlyEmi: d.monthlyEmi ?? server.monthlyEmi,
+      liquidSavings: d.liquidSavings ?? server.liquidSavings,
+      dependents: d.dependents ?? server.dependents,
+    }));
   }, [profileData, setDraft]);
 
   const step = STEPS[stepIndex]!;

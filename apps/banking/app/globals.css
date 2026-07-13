@@ -18,7 +18,8 @@
   --color-surface: #ffffff;
   --color-background: #f4f7f6;
   --color-border: #dbe5e1;
-  --color-positive: #1b7f4d;
+  /* ≥4.5:1 on primary-soft pills — verified by the axe suite. */
+  --color-positive: #156b40;
   --color-negative: #b93a2b;
   --color-warning: #8a5a10;
   --color-warning-soft: #fdf3df;

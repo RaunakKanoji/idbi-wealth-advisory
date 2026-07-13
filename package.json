@@ -12,6 +12,8 @@
     "dev": "npm run dev --workspace @idbi/banking",
     "build": "npm run build --workspace @idbi/banking",
     "start": "npm run start --workspace @idbi/banking",
-    "typecheck": "npm run typecheck --workspace @idbi/banking"
+    "typecheck": "npm run typecheck --workspace @idbi/banking",
+    "test": "npm test -w @idbi/financial-domain",
+    "test:e2e": "npm run test:e2e -w @idbi/banking"
   }
 }

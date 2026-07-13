@@ -28,3 +28,7 @@ yarn-error.log*
 .vercel
 *.tsbuildinfo
 next-env.d.ts
+
+# Playwright
+apps/banking/test-results/
+apps/banking/playwright-report/
