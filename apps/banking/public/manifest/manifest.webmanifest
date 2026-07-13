@@ -1,0 +1,17 @@
+{
+  "name": "IDBI Wealth Copilot",
+  "short_name": "Wealth Copilot",
+  "description": "Your conversational wealth advisor from IDBI Bank.",
+  "start_url": "/overview",
+  "display": "standalone",
+  "background_color": "#f4f7f6",
+  "theme_color": "#0b5b4c",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

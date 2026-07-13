@@ -1,0 +1,14 @@
+/* Design tokens that live outside the Tailwind theme (F002).
+   Color/typography tokens live in app/globals.css under @theme.
+   --bottom-nav-height mirrors BOTTOM_NAV_HEIGHT_PX in @idbi/config. */
+
+:root {
+  --bottom-nav-height: 64px;
+  --touch-target-min: 44px;
+
+  --radius-card: 16px;
+  --radius-control: 12px;
+
+  --shadow-card: 0 1px 2px rgb(16 34 29 / 0.06), 0 4px 12px rgb(16 34 29 / 0.05);
+  --shadow-raised: 0 4px 10px rgb(16 34 29 / 0.14), 0 1px 3px rgb(16 34 29 / 0.1);
+}

@@ -1,0 +1,20 @@
+/* Safe-area utilities (F106/F107). Shell, navigation, sheets, and toasts must use
+   these instead of assuming browser chrome provides spacing (WebView included). */
+
+.safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Clears the bottom navigation plus the device safe area — applied to main
+   content and anything anchored above the nav (sticky actions, launcher). */
+.pb-bottom-nav {
+  padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px));
+}
+
+.above-bottom-nav {
+  bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px) + 12px);
+}

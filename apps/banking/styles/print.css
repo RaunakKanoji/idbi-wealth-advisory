@@ -1,0 +1,11 @@
+@media print {
+  .no-print,
+  nav,
+  [data-copilot-launcher] {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+  }
+}

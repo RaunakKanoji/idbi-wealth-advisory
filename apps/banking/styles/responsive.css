@@ -1,0 +1,20 @@
+/* Horizontal-overflow protection (F106): the page body never scrolls
+   horizontally. Wide content must opt into its own scroll container. */
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* Wrapper for intentionally wide content (tables, wide charts). */
+.overflow-guard {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prose line lengths stay readable regardless of viewport. */
+.readable {
+  max-width: 70ch;
+}

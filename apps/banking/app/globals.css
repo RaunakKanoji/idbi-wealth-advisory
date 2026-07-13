@@ -1,0 +1,39 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+@import "../styles/safe-area.css";
+@import "../styles/responsive.css";
+@import "../styles/motion.css";
+@import "../styles/print.css";
+
+/* Design tokens (F002). Semantic names only at usage sites; light theme for the
+   hackathon, structured so a dark theme can be added without renaming. */
+@theme {
+  --color-primary: #0b5b4c;
+  --color-primary-strong: #084a3e;
+  --color-primary-soft: #e3f0ec;
+  --color-accent: #ee7a23;
+  --color-accent-soft: #fdeedd;
+  --color-ink: #14201d;
+  --color-muted: #55655f;
+  --color-surface: #ffffff;
+  --color-background: #f4f7f6;
+  --color-border: #dbe5e1;
+  --color-positive: #1b7f4d;
+  --color-negative: #b93a2b;
+  --color-warning: #8a5a10;
+  --color-warning-soft: #fdf3df;
+  --color-info: #2563eb;
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-info);
+    outline-offset: 2px;
+  }
+
+  body {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
