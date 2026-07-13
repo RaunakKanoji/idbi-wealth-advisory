@@ -1,55 +1,18 @@
 import { NextResponse } from "next/server";
-import {
-  analyzeAllocation,
-  computeWealthHealth,
-  deriveBasicRecommendations,
-  projectGoal,
-} from "@idbi/financial-domain";
-import {
-  demoCustomer,
-  demoGoals,
-  demoHoldings,
-  demoProfile,
-  demoSources,
-} from "@idbi/test-fixtures";
-import type { ApiEnvelope, OverviewData } from "@idbi/types";
+import type { OverviewData } from "@idbi/types";
+import { buildCustomerSnapshot, envelope } from "@/lib/api/snapshot";
 
-/**
- * BFF handler (F005): thin composition of fixtures (mock providers, F006) and the
- * financial domain engine (F004). No calculations live here — extractable to
- * services/api without changing the client contract.
- */
+/** Thin BFF (F005): slices the shared snapshot; no calculations here. */
 export async function GET() {
-  const asOfYear = new Date().getFullYear();
-  const projections = demoGoals.map((goal) => projectGoal(goal, asOfYear));
-  const allocation = analyzeAllocation(demoHoldings);
-  const wealthHealth = computeWealthHealth({
-    profile: demoProfile,
-    holdings: demoHoldings,
-    goals: demoGoals,
-    projections,
-  });
-  const recommendations = deriveBasicRecommendations({
-    profile: demoProfile,
-    wealthHealth,
-    allocation,
-    goals: demoGoals,
-    projections,
-  });
-
+  const snapshot = buildCustomerSnapshot();
   const data: OverviewData = {
-    customer: demoCustomer,
-    wealthHealth,
-    netWorth: allocation.total + demoProfile.liquidSavings,
-    monthlySavings: demoProfile.monthlyIncome - demoProfile.monthlyExpenses - demoProfile.monthlyEmi,
-    portfolioValue: allocation.total,
-    topRecommendations: recommendations.slice(0, 3),
+    customer: snapshot.customer,
+    wealthHealth: snapshot.wealthHealth,
+    netWorth: snapshot.allocation.total + snapshot.profile.liquidSavings,
+    monthlySavings:
+      snapshot.profile.monthlyIncome - snapshot.profile.monthlyExpenses - snapshot.profile.monthlyEmi,
+    portfolioValue: snapshot.allocation.total,
+    topRecommendations: snapshot.recommendations.slice(0, 3),
   };
-
-  const envelope: ApiEnvelope<OverviewData> = {
-    data,
-    asOf: new Date().toISOString(),
-    sources: demoSources,
-  };
-  return NextResponse.json(envelope);
+  return NextResponse.json(envelope(data, snapshot.sources));
 }

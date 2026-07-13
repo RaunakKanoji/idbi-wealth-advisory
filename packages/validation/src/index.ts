@@ -49,6 +49,12 @@ export const goalFormSchema = z.object({
 
 export type GoalFormInput = z.infer<typeof goalFormSchema>;
 
+export const copilotQuestionSchema = z.object({
+  question: z.string().trim().min(1, "Ask a question").max(500, "Keep questions under 500 characters"),
+});
+
+export type CopilotQuestionInput = z.infer<typeof copilotQuestionSchema>;
+
 export const consentSchema = z.object({
   accountAggregator: z.boolean(),
   analytics: z.boolean(),

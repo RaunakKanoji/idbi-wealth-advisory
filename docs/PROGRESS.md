@@ -67,22 +67,30 @@ Known minor issue: the floating Copilot launcher can overlap the trailing edge
 of the last list item at the very bottom of a scrolled page (e.g. the "Stale"
 pill on /overview). Status text remains readable; revisit with F110 full states.
 
-## Phase 2 — Complete mobile customer journey ⬜ NOT STARTED
+## Phase 2 — Complete mobile customer journey 🟨 IN PROGRESS (tranche 1 landed 2026-07-13)
 
-- [ ] 1. Authentication
-- [ ] 2. Mobile app shell integration
-- [ ] 3. Customer profile
-- [ ] 4. Consent
-- [ ] 5. Financial data (connected sources)
-- [ ] 6. Wealth dashboard
-- [ ] 7. Wealth health
-- [ ] 8. Spending
-- [ ] 9. Portfolio
-- [ ] 10. Risk profile
-- [ ] 11. Goals
+Tranche 1 (2026-07-13): bot avatar (SVG mascot in launcher + Copilot stage),
+conversational Copilot backed by a deterministic BFF brain reading the same
+customer snapshot as every screen, and the wealth-health / portfolio / goals /
+recommendations screens. All verified at 320px with no overflow; conversation
+state survives navigation; Copilot numbers match screen numbers exactly.
+
+- [x] 1. Authentication (demo, Phase 1)
+- [x] 2. Mobile app shell integration (Phase 1)
+- [ ] 3. Customer profile (step form — next tranche, completes F109)
+- [ ] 4. Consent (step form — next tranche)
+- [~] 5. Financial data — source freshness on overview; management screen pending
+- [x] 6. Wealth dashboard (overview)
+- [x] 7. Wealth health (pillar breakdown + explanations)
+- [ ] 8. Spending (needs transaction fixtures)
+- [x] 9. Portfolio (allocation, concentration warnings, holdings)
+- [ ] 10. Risk profile (step form — next tranche)
+- [~] 11. Goals — list + projections + gap analysis live; creation form pending
 - [ ] 12. Simulation
-- [ ] 13. Recommendations
-- [ ] 14. Copilot
+- [x] 13. Recommendations (full list with evidence)
+- [~] 14. Copilot — text conversation, suggested prompts, avatar states
+      (greeting/compact/minimized), offline fallback reply; deterministic
+      keyword brain is the placeholder for services/conversational-ai
 - [ ] 15. Advisor handoff
 - [ ] 16. Documents
 - [ ] 17. Advisory history

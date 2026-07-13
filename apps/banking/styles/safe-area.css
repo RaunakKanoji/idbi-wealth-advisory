@@ -18,3 +18,9 @@
 .above-bottom-nav {
   bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px) + 12px);
 }
+
+/* Sticky element (e.g. the Copilot composer) pinned just above the bottom nav. */
+.sticky-above-nav {
+  position: sticky;
+  bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px));
+}

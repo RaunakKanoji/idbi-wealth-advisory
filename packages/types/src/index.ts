@@ -137,6 +137,28 @@ export interface OverviewData {
   topRecommendations: Recommendation[];
 }
 
+// ---------- Feature payloads ----------
+
+export interface PortfolioData {
+  allocation: AllocationAnalysis;
+  holdings: Holding[];
+}
+
+export interface GoalsData {
+  goals: Goal[];
+  projections: GoalProjection[];
+}
+
+export interface CopilotQuestion {
+  question: string;
+}
+
+export interface CopilotAnswer {
+  reply: string;
+  /** Matched intent (for analytics dimension) — e.g. "wealth_health", "goals". */
+  intent: string;
+}
+
 // ---------- Conversation / avatar ----------
 
 export type AvatarStateName =

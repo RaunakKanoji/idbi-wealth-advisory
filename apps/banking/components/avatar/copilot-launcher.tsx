@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { ANALYTICS_EVENTS } from "@idbi/analytics";
-import { Icon } from "@/components/navigation/icons";
+import { CopilotAvatar } from "@/components/avatar/copilot-avatar";
 import { track } from "@/lib/analytics/track";
 import { isActive } from "@/lib/navigation";
 
@@ -27,9 +27,9 @@ export function CopilotLauncher() {
         track(ANALYTICS_EVENTS.copilotLauncherTapped, { from_screen: pathname });
         router.push("/copilot");
       }}
-      className="above-bottom-nav fixed right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-(--shadow-raised) active:scale-95"
+      className="above-bottom-nav fixed right-4 z-40 flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border-2 border-accent bg-white shadow-(--shadow-raised) active:scale-95"
     >
-      <Icon name="copilot" className="h-7 w-7" />
+      <CopilotAvatar variant="face" className="h-12 w-12" />
     </button>
   );
 }

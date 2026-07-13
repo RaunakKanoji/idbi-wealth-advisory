@@ -25,18 +25,22 @@ calculations must always be FULL_PARITY.
 
 > Populated as features land in Phase 2+. Every feature PR adds/updates its row.
 
+Legend: ✅ implemented · base = functional via the mobile-first responsive layout
+(dedicated tablet/desktop LAYOUT_VARIANTs arrive in Phases 4–5) · — not built yet.
+
 | Feature | Mobile | Tablet | Desktop | Class | Notes / decision ref |
 | --- | --- | --- | --- | --- | --- |
-| Authentication | — | — | — | FULL_PARITY (required) | |
+| Authentication | ✅ (demo) | base | base | FULL_PARITY (required) | Demo IdP behind real provider interface (F007) |
+| Overview dashboard | ✅ | base | base | FULL_PARITY (required) | Same snapshot as all other surfaces |
 | Consent management | — | — | — | FULL_PARITY (required) | |
 | Financial profile | — | — | — | FULL_PARITY (required) | Step form vs grouped fields = LAYOUT_VARIANT presentation |
 | Risk profiling | — | — | — | FULL_PARITY (required) | |
-| Wealth health score | — | — | — | FULL_PARITY (required) | |
-| Spending behaviour | — | — | — | FULL_PARITY (required) | |
-| Portfolio health | — | — | — | FULL_PARITY (required) | Web adds tables (WEB_ENHANCEMENT presentation) |
-| Goals + simulations | — | — | — | FULL_PARITY (required) | |
-| Recommendations | — | — | — | FULL_PARITY (required) | |
-| Copilot conversation | — | — | — | FULL_PARITY (required) | Split view = LAYOUT_VARIANT; voice = CAPABILITY_FALLBACK |
+| Wealth health score | ✅ | base | base | FULL_PARITY (required) | Pillars + explanations from shared engine |
+| Spending behaviour | — | — | — | FULL_PARITY (required) | Needs transaction fixtures |
+| Portfolio health | ✅ | base | base | FULL_PARITY (required) | Web adds tables (WEB_ENHANCEMENT presentation) |
+| Goals + simulations | ✅ view | base | base | FULL_PARITY (required) | Projections live; creation form + simulator pending |
+| Recommendations | ✅ | base | base | FULL_PARITY (required) | Evidence screen live; same recs on overview/Copilot |
+| Copilot conversation | ✅ text | base | base | FULL_PARITY (required) | Deterministic brain on shared snapshot; split view = LAYOUT_VARIANT (F116); voice = CAPABILITY_FALLBACK |
 | Advisor handoff | — | — | — | FULL_PARITY (required) | |
 | Documents / advisory history | — | — | — | FULL_PARITY (required) | |
 | Notifications | — | — | — | FULL_PARITY | Push = CAPABILITY_FALLBACK to in-app |

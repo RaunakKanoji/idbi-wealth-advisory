@@ -12,6 +12,7 @@ export const ANALYTICS_EVENTS = {
   moreMenuOpened: "more_menu_opened",
   copilotLauncherTapped: "copilot_launcher_tapped",
   recommendationViewed: "recommendation_viewed",
+  copilotMessageSent: "copilot_message_sent",
   errorShown: "error_shown",
 } as const;
 
@@ -25,6 +26,7 @@ export interface AnalyticsEventParams {
   more_menu_opened: Record<string, never>;
   copilot_launcher_tapped: { from_screen: string };
   recommendation_viewed: { recommendation_id: string };
+  copilot_message_sent: { intent: string };
   error_shown: { code: string; surface: string };
 }
 
