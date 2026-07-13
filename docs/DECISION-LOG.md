@@ -78,6 +78,25 @@ gap; all routes exist on all surfaces.
 
 ---
 
+## D-006 — In-memory demo store for customer edits (2026-07-13)
+
+**Status:** Accepted (hackathon scope)
+
+**Context:** Phase 2 forms (financial profile, risk, consent, goal creation,
+advisor requests) need persistence, but the hackathon has no database.
+
+**Decision:** Customer edits persist in a server-process-scoped in-memory store
+(`apps/banking/lib/api/store.ts`, hung off `globalThis` to survive dev HMR).
+The snapshot builder consumes the store, so edits and consent changes recompute
+every downstream number in the BFF. State resets on server restart.
+
+**Consequences:** The full journey is demonstrable end to end with real
+recalculation; consent enforcement lives server-side per the parity rules.
+Replacing the store with real services later changes only `store.ts` and the
+snapshot builder — no screen or schema changes.
+
+---
+
 <!-- Template
 ## D-XXX — Title (YYYY-MM-DD)
 **Status:** Proposed | Accepted | Superseded by D-YYY

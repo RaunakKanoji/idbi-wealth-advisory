@@ -137,6 +137,75 @@ export interface OverviewData {
   topRecommendations: Recommendation[];
 }
 
+// ---------- Spending ----------
+
+export type SpendingCategory =
+  | "groceries"
+  | "dining"
+  | "transport"
+  | "utilities"
+  | "entertainment"
+  | "shopping"
+  | "health"
+  | "other";
+
+export interface Transaction {
+  id: string;
+  date: string; // ISO date
+  description: string;
+  /** Positive INR spend amount. */
+  amount: number;
+  category: SpendingCategory;
+  sourceId: string;
+}
+
+export interface SpendingCategorySummary {
+  category: SpendingCategory;
+  total: number;
+  pct: number; // share of the month's spend, 0..100
+}
+
+export interface SpendingSummary {
+  month: string; // "YYYY-MM"
+  monthTotal: number;
+  previousMonthTotal: number;
+  /** Percent change vs previous month; negative means spending fell. */
+  deltaPct: number;
+  byCategory: SpendingCategorySummary[];
+}
+
+// ---------- Consent ----------
+
+export interface ConsentSettings {
+  accountAggregator: boolean;
+  analytics: boolean;
+  marketing: boolean;
+}
+
+// ---------- Documents / advisory history / notifications ----------
+
+export interface DocumentItem {
+  id: string;
+  name: string;
+  type: "statement" | "disclosure" | "report";
+  date: string;
+}
+
+export interface AdvisoryEvent {
+  id: string;
+  date: string;
+  title: string;
+  detail: string;
+}
+
+export interface NotificationItem {
+  id: string;
+  date: string;
+  title: string;
+  body: string;
+  kind: "recommendation" | "alert" | "info";
+}
+
 // ---------- Feature payloads ----------
 
 export interface PortfolioData {
@@ -151,6 +220,27 @@ export interface GoalsData {
 
 export interface CopilotQuestion {
   question: string;
+}
+
+export interface SpendingData {
+  summary: SpendingSummary;
+  transactions: Transaction[];
+}
+
+export interface ProfileData {
+  profile: FinancialProfile;
+  risk: RiskAssessment | null;
+  /** False while the profile is still the connected-data default. */
+  isCustomerProvided: boolean;
+}
+
+export interface DocumentsData {
+  documents: DocumentItem[];
+  history: AdvisoryEvent[];
+}
+
+export interface AdvisorRequestResult {
+  referenceId: string;
 }
 
 export interface CopilotAnswer {

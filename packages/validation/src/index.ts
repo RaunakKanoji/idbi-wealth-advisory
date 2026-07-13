@@ -11,18 +11,22 @@ const inrAmount = z
   .nonnegative("Amount cannot be negative")
   .max(1_000_000_000, "Amount is too large");
 
-export const financialProfileSchema = z
-  .object({
-    monthlyIncome: inrAmount.refine((v) => v > 0, "Monthly income is required"),
-    monthlyExpenses: inrAmount,
-    monthlyEmi: inrAmount,
-    liquidSavings: inrAmount,
-    dependents: z.number().int().min(0).max(20),
-  })
-  .refine((p) => p.monthlyExpenses + p.monthlyEmi <= p.monthlyIncome * 3, {
+/** Field-level schema — step forms validate slices of this via .pick (F109). */
+export const financialProfileFieldsSchema = z.object({
+  monthlyIncome: inrAmount.refine((v) => v > 0, "Monthly income is required"),
+  monthlyExpenses: inrAmount,
+  monthlyEmi: inrAmount,
+  liquidSavings: inrAmount,
+  dependents: z.number().int().min(0).max(20),
+});
+
+export const financialProfileSchema = financialProfileFieldsSchema.refine(
+  (p) => p.monthlyExpenses + p.monthlyEmi <= p.monthlyIncome * 3,
+  {
     message: "Expenses look inconsistent with income — please review",
     path: ["monthlyExpenses"],
-  });
+  },
+);
 
 export type FinancialProfileInput = z.infer<typeof financialProfileSchema>;
 
@@ -54,6 +58,27 @@ export const copilotQuestionSchema = z.object({
 });
 
 export type CopilotQuestionInput = z.infer<typeof copilotQuestionSchema>;
+
+/** Ongoing consent management (the onboarding disclosure uses consentSchema). */
+export const consentUpdateSchema = z.object({
+  accountAggregator: z.boolean(),
+  analytics: z.boolean(),
+  marketing: z.boolean(),
+});
+
+export type ConsentUpdateInput = z.infer<typeof consentUpdateSchema>;
+
+export const advisorRequestSchema = z.object({
+  reason: z.enum(["portfolio_review", "goal_planning", "insurance", "tax", "other"], {
+    errorMap: () => ({ message: "Choose a topic" }),
+  }),
+  contactTime: z.enum(["morning", "afternoon", "evening"], {
+    errorMap: () => ({ message: "Choose a preferred time" }),
+  }),
+  note: z.string().trim().max(500, "Keep the note under 500 characters").optional(),
+});
+
+export type AdvisorRequestInput = z.infer<typeof advisorRequestSchema>;
 
 export const consentSchema = z.object({
   accountAggregator: z.boolean(),

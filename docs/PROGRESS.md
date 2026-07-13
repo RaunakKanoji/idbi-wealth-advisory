@@ -67,36 +67,49 @@ Known minor issue: the floating Copilot launcher can overlap the trailing edge
 of the last list item at the very bottom of a scrolled page (e.g. the "Stale"
 pill on /overview). Status text remains readable; revisit with F110 full states.
 
-## Phase 2 — Complete mobile customer journey 🟨 IN PROGRESS (tranche 1 landed 2026-07-13)
+## Phase 2 — Complete mobile customer journey ✅ FEATURE-COMPLETE (2026-07-13)
 
-Tranche 1 (2026-07-13): bot avatar (SVG mascot in launcher + Copilot stage),
-conversational Copilot backed by a deterministic BFF brain reading the same
-customer snapshot as every screen, and the wealth-health / portfolio / goals /
-recommendations screens. All verified at 320px with no overflow; conversation
-state survives navigation; Copilot numbers match screen numbers exactly.
+Tranche 1: bot avatar, conversational Copilot (deterministic BFF brain on the
+shared snapshot), wealth-health/portfolio/goals/recommendations screens.
+Tranche 2: F109 step-form system (StepShell, fields, save/resume drafts),
+financial profile + risk questionnaire + consent flows with a server-side demo
+store (D-006) — profile edits and consent changes recompute the whole dashboard
+in the BFF; spending (transactions + month-over-month summary); goal creation;
+live what-if simulator; advisor handoff; documents + advisory history;
+notifications; settings with sign-out.
 
-- [x] 1. Authentication (demo, Phase 1)
-- [x] 2. Mobile app shell integration (Phase 1)
-- [ ] 3. Customer profile (step form — next tranche, completes F109)
-- [ ] 4. Consent (step form — next tranche)
-- [~] 5. Financial data — source freshness on overview; management screen pending
+- [x] 1. Authentication (demo)
+- [x] 2. Mobile app shell integration
+- [x] 3. Customer profile (5-step form; prefill, drafts, review, recalculation)
+- [x] 4. Consent (management screen; withdrawal warning; BFF enforcement —
+      AA off removes AA holdings, marks sources unavailable, recomputes score)
+- [x] 5. Financial data (source freshness on overview; consent controls sharing)
 - [x] 6. Wealth dashboard (overview)
 - [x] 7. Wealth health (pillar breakdown + explanations)
-- [ ] 8. Spending (needs transaction fixtures)
+- [x] 8. Spending (month total, MoM delta, category bars, transactions)
 - [x] 9. Portfolio (allocation, concentration warnings, holdings)
-- [ ] 10. Risk profile (step form — next tranche)
-- [~] 11. Goals — list + projections + gap analysis live; creation form pending
-- [ ] 12. Simulation
+- [x] 10. Risk profile (6-question step flow → domain scoring → category)
+- [x] 11. Goals (list + projections + gap analysis + 4-step creation flow)
+- [x] 12. Simulation (live sliders through the same projection engine)
 - [x] 13. Recommendations (full list with evidence)
-- [~] 14. Copilot — text conversation, suggested prompts, avatar states
-      (greeting/compact/minimized), offline fallback reply; deterministic
-      keyword brain is the placeholder for services/conversational-ai
-- [ ] 15. Advisor handoff
-- [ ] 16. Documents
-- [ ] 17. Advisory history
-- [ ] 18. Settings
+- [x] 14. Copilot — text conversation, suggested prompts, avatar states,
+      offline fallback, spending intent; deterministic keyword brain is the
+      placeholder for services/conversational-ai
+- [x] 15. Advisor handoff (2-step request → reference id → confirmation)
+- [x] 16. Documents (list with type/date)
+- [x] 17. Advisory history (timeline on the Documents screen)
+- [x] 18. Settings (account, section links, accessibility status, sign out)
 
-Gate: no desktop-specific layout work during this phase.
+Verified 2026-07-13 at 320px (no overflow on any route) and via API checks:
+profile save recomputed score 72→74 and savings ₹63K→₹1.33L; AA consent
+withdrawal shrank the portfolio to IDBI-only data and recomputed the score to
+65; simulator flips on-track/falls-short live. Build green (35 pages).
+
+Remaining for Phase 3 (stabilization): virtual-keyboard testing on real
+devices, WebView back behaviour, slow-network journey run, screen-reader pass,
+F111 bundle budget assertion in CI, mobile E2E suite.
+
+Gate: no desktop-specific layout work during this phase. ✅ Held.
 
 ## Phase 3 — Mobile stabilization ⬜ NOT STARTED
 

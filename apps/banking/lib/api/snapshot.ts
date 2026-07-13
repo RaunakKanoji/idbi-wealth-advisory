@@ -5,6 +5,7 @@ import {
   projectGoal,
 } from "@idbi/financial-domain";
 import {
+  accountAggregatorSourceIds,
   demoCustomer,
   demoGoals,
   demoHoldings,
@@ -13,6 +14,7 @@ import {
 } from "@idbi/test-fixtures";
 import type {
   AllocationAnalysis,
+  ConsentSettings,
   CustomerSummary,
   DataSourceStatus,
   FinancialProfile,
@@ -22,10 +24,12 @@ import type {
   Recommendation,
   WealthHealthScore,
 } from "@idbi/types";
+import { demoStore } from "@/lib/api/store";
 
 export interface CustomerSnapshot {
   customer: CustomerSummary;
   profile: FinancialProfile;
+  consent: ConsentSettings;
   holdings: Holding[];
   goals: Goal[];
   projections: GoalProjection[];
@@ -35,38 +39,52 @@ export interface CustomerSnapshot {
   sources: DataSourceStatus[];
 }
 
+const aaSourceIds = new Set<string>(accountAggregatorSourceIds);
+
 /**
  * Server-side only. The one place BFF routes assemble customer data: mock
- * providers (F006) + the financial domain engine (F004). Every endpoint slices
- * this snapshot, so all screens — and the Copilot — see identical numbers.
+ * providers (F006) + demo-store overrides + the financial domain engine (F004).
+ * Consent is enforced HERE, not in the UI (mobile-web-parity rule): withdrawing
+ * Account Aggregator consent removes AA holdings and marks AA sources
+ * unavailable, and every downstream number recomputes accordingly.
  */
 export function buildCustomerSnapshot(): CustomerSnapshot {
+  const consent = demoStore.consent;
+  const profile = demoStore.profileOverride ?? demoProfile;
+
+  const holdings = consent.accountAggregator
+    ? demoHoldings
+    : demoHoldings.filter((h) => !aaSourceIds.has(h.sourceId));
+  const sources = demoSources.map((source) =>
+    !consent.accountAggregator && aaSourceIds.has(source.id)
+      ? { ...source, status: "unavailable" as const }
+      : source,
+  );
+
+  const goals = [...demoGoals, ...demoStore.extraGoals];
   const asOfYear = new Date().getFullYear();
-  const projections = demoGoals.map((goal) => projectGoal(goal, asOfYear));
-  const allocation = analyzeAllocation(demoHoldings);
-  const wealthHealth = computeWealthHealth({
-    profile: demoProfile,
-    holdings: demoHoldings,
-    goals: demoGoals,
-    projections,
-  });
+  const projections = goals.map((goal) => projectGoal(goal, asOfYear));
+  const allocation = analyzeAllocation(holdings);
+  const wealthHealth = computeWealthHealth({ profile, holdings, goals, projections });
   const recommendations = deriveBasicRecommendations({
-    profile: demoProfile,
+    profile,
     wealthHealth,
     allocation,
-    goals: demoGoals,
+    goals,
     projections,
   });
+
   return {
     customer: demoCustomer,
-    profile: demoProfile,
-    holdings: demoHoldings,
-    goals: demoGoals,
+    profile,
+    consent,
+    holdings,
+    goals,
     projections,
     allocation,
     wealthHealth,
     recommendations,
-    sources: demoSources,
+    sources,
   };
 }
 

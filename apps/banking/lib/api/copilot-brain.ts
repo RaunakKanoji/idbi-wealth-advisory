@@ -1,5 +1,12 @@
+import { summarizeSpending } from "@idbi/financial-domain";
+import { demoTransactions } from "@idbi/test-fixtures";
 import type { CopilotAnswer } from "@idbi/types";
 import type { CustomerSnapshot } from "@/lib/api/snapshot";
+
+/** Deterministic: the latest month present in the transaction data. */
+export function latestSpendingMonth(): string {
+  return demoTransactions.map((t) => t.date).sort().at(-1)!.slice(0, 7);
+}
 
 const inr = new Intl.NumberFormat("en-IN", {
   style: "currency",
@@ -72,11 +79,19 @@ export function answerQuestion(question: string, snapshot: CustomerSnapshot): Co
   }
 
   if (/(spend|expense)/.test(q)) {
+    const summary = summarizeSpending(demoTransactions, latestSpendingMonth());
+    const top = summary.byCategory.slice(0, 3)
+      .map((c) => `${c.category} ${inr.format(c.total)} (${c.pct}%)`)
+      .join(", ");
+    const direction =
+      summary.deltaPct <= 0
+        ? `down ${Math.abs(summary.deltaPct)}%`
+        : `up ${summary.deltaPct}%`;
     return {
-      intent: "spending_unavailable",
+      intent: "spending",
       reply:
-        "Spending analysis is coming shortly — for now I can tell you your monthly outgoings are " +
-        `${inr.format(profile.monthlyExpenses + profile.monthlyEmi)} against ${inr.format(profile.monthlyIncome)} income.`,
+        `You've spent ${inr.format(summary.monthTotal)} so far this month — ${direction} vs last month. ` +
+        `Biggest categories: ${top}.`,
     };
   }
 

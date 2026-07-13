@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { AvatarStage } from "@/components/avatar/avatar-stage";
 import { useScreenView } from "@/lib/analytics/track";
@@ -79,6 +80,10 @@ export function CopilotScreen() {
         ) : null}
         <div ref={endRef} aria-hidden="true" />
       </div>
+
+      <Link href="/advisor" className="self-center text-xs font-medium text-muted underline underline-offset-2">
+        Prefer a human? Request an advisor
+      </Link>
 
       <form
         className="sticky-above-nav z-30 -mx-4 border-t border-border bg-background px-4 py-3"

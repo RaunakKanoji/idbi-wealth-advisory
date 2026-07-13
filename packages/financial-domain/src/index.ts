@@ -16,6 +16,9 @@ import type {
   Recommendation,
   RiskAssessment,
   RiskCategory,
+  SpendingCategorySummary,
+  SpendingSummary,
+  Transaction,
   WealthHealthBand,
   WealthHealthPillar,
   WealthHealthScore,
@@ -97,6 +100,48 @@ export function assessRisk(answers: number[]): RiskAssessment {
   else if (score < 4) category = "growth";
   else category = "aggressive";
   return { score, category };
+}
+
+// ---------- Spending ----------
+
+function previousMonth(month: string): string {
+  const [year, m] = month.split("-").map(Number);
+  if (!year || !m) return month;
+  return m === 1 ? `${year - 1}-12` : `${year}-${String(m - 1).padStart(2, "0")}`;
+}
+
+/**
+ * Summarizes spending for `month` ("YYYY-MM", passed in — no environment time)
+ * with a month-over-month comparison. Pure and deterministic (F004).
+ */
+export function summarizeSpending(transactions: Transaction[], month: string): SpendingSummary {
+  const prev = previousMonth(month);
+  const inMonth = (t: Transaction, m: string) => t.date.startsWith(m);
+
+  const monthTx = transactions.filter((t) => inMonth(t, month));
+  const monthTotal = monthTx.reduce((s, t) => s + t.amount, 0);
+  const previousMonthTotal = transactions
+    .filter((t) => inMonth(t, prev))
+    .reduce((s, t) => s + t.amount, 0);
+
+  const byCategoryMap = new Map<string, number>();
+  for (const t of monthTx) {
+    byCategoryMap.set(t.category, (byCategoryMap.get(t.category) ?? 0) + t.amount);
+  }
+  const byCategory: SpendingCategorySummary[] = [...byCategoryMap.entries()]
+    .map(([category, total]) => ({
+      category: category as SpendingCategorySummary["category"],
+      total,
+      pct: monthTotal > 0 ? round1((total / monthTotal) * 100) : 0,
+    }))
+    .sort((a, b) => b.total - a.total);
+
+  const deltaPct =
+    previousMonthTotal > 0
+      ? round1(((monthTotal - previousMonthTotal) / previousMonthTotal) * 100)
+      : 0;
+
+  return { month, monthTotal, previousMonthTotal, deltaPct, byCategory };
 }
 
 // ---------- Wealth health ----------

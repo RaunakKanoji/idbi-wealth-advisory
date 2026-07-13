@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import type { ApiEnvelope, GoalsData } from "@idbi/types";
 import { ErrorState } from "@/components/feedback/error-state";
@@ -43,6 +44,14 @@ export function GoalsScreen() {
 
   return (
     <div className="flex flex-col gap-4 py-5">
+      <div className="flex justify-end">
+        <Link
+          href="/goals/new"
+          className="flex min-h-11 items-center rounded-(--radius-control) bg-primary px-5 text-sm font-semibold text-white"
+        >
+          Add goal
+        </Link>
+      </div>
       {goals.map((goal) => {
         const projection = projections.find((p) => p.goalId === goal.id);
         if (!projection) return null;
@@ -102,8 +111,8 @@ export function GoalsScreen() {
         );
       })}
       <p className="text-xs text-muted">
-        Projections assume each goal's expected return, compounded monthly. Creating and editing
-        goals arrives with the goal-form step flow.
+        Projections assume each goal's expected return, compounded monthly. Try what-if changes in
+        the Simulator without touching your real goals.
       </p>
     </div>
   );

@@ -1,7 +1,7 @@
-import { PagePlaceholder } from "@/components/feedback/page-placeholder";
+import { ProfileScreen } from "@/features/profile/profile-screen";
 
 export const metadata = { title: "Profile" };
 
 export default function Page() {
-  return <PagePlaceholder title="Profile" description="Your financial and risk profile arrives with the Phase 2 journey." />;
+  return <ProfileScreen />;
 }

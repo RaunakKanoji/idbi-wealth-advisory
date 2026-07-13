@@ -1,7 +1,7 @@
-import { PagePlaceholder } from "@/components/feedback/page-placeholder";
+import { SimulatorScreen } from "@/features/simulator/simulator-screen";
 
 export const metadata = { title: "Simulator" };
 
 export default function Page() {
-  return <PagePlaceholder title="Simulator" description="Goal and scenario simulations arrive with the Phase 2 journey." />;
+  return <SimulatorScreen />;
 }

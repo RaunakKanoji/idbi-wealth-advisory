@@ -49,6 +49,9 @@ export const moreDestinations: NavDestination[] = [
 
 export const routeTitles: Record<string, string> = {
   "/overview": "IDBI Wealth Copilot",
+  "/profile/financial": "Financial Profile",
+  "/profile/risk": "Risk Profile",
+  "/goals/new": "New Goal",
   "/wealth-health": "Wealth Health",
   "/copilot": "Copilot",
   "/goals": "Goals",

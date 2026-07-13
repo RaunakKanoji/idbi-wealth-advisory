@@ -13,6 +13,9 @@ export const ANALYTICS_EVENTS = {
   copilotLauncherTapped: "copilot_launcher_tapped",
   recommendationViewed: "recommendation_viewed",
   copilotMessageSent: "copilot_message_sent",
+  formStarted: "form_started",
+  formCompleted: "form_completed",
+  advisorRequested: "advisor_requested",
   errorShown: "error_shown",
 } as const;
 
@@ -27,6 +30,9 @@ export interface AnalyticsEventParams {
   copilot_launcher_tapped: { from_screen: string };
   recommendation_viewed: { recommendation_id: string };
   copilot_message_sent: { intent: string };
+  form_started: { form: string };
+  form_completed: { form: string };
+  advisor_requested: Record<string, never>;
   error_shown: { code: string; surface: string };
 }
 
