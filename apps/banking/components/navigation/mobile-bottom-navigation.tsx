@@ -60,7 +60,8 @@ export function MobileBottomNavigation() {
     <>
       <nav
         aria-label="Primary"
-        className="safe-bottom fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface"
+        data-nav-variant="bottom"
+        className="safe-bottom fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface md:hidden"
       >
         <ul className="mx-auto flex h-(--bottom-nav-height) max-w-3xl items-stretch">
           {primaryTabs.map((tab) => {

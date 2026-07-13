@@ -47,6 +47,7 @@ export function RecommendationsScreen() {
 
   return (
     <div className="flex flex-col gap-4 py-5">
+      <div className="flex flex-col gap-4 md:grid md:grid-cols-2 md:items-start">
       {data.data.map((recommendation) => (
         <article
           key={recommendation.id}
@@ -67,6 +68,7 @@ export function RecommendationsScreen() {
           </div>
         </article>
       ))}
+      </div>
       <p className="text-xs text-muted">
         These suggestions are derived from your connected data and standard planning rules. They are
         educational, not a substitute for personalised advice from a registered adviser.

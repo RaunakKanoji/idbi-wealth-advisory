@@ -69,6 +69,7 @@ export function SpendingScreen() {
         </p>
       </section>
 
+      <div className="flex flex-col gap-5 md:grid md:grid-cols-2 md:items-start">
       <section aria-label="Spending by category" className="flex flex-col gap-3">
         <h2 className="text-sm font-semibold text-muted">Where it went</h2>
         <div className="flex flex-col gap-3 rounded-(--radius-card) border border-border bg-surface p-4">
@@ -106,6 +107,7 @@ export function SpendingScreen() {
           ))}
         </ul>
       </section>
+      </div>
     </div>
   );
 }

@@ -151,8 +151,10 @@ export function FinancialProfileFlow() {
           error={fieldErrors.monthlyIncome}
         />
       ) : null}
+      {/* Related fields sit side by side on wider screens (F113) — same
+          validation and completion logic as the stacked mobile layout. */}
       {step.id === "outgoings" ? (
-        <>
+        <div className="flex flex-col gap-4 sm:grid sm:grid-cols-2 sm:items-start">
           <CurrencyField
             label="Monthly living expenses"
             hint="Rent, food, transport, utilities — everything except loan EMIs."
@@ -167,7 +169,7 @@ export function FinancialProfileFlow() {
             onChange={set("monthlyEmi")}
             error={fieldErrors.monthlyEmi}
           />
-        </>
+        </div>
       ) : null}
       {step.id === "savings" ? (
         <CurrencyField

@@ -1,15 +1,15 @@
 import { SkipLink } from "@/components/accessibility/skip-link";
 import { CopilotLauncher } from "@/components/avatar/copilot-launcher";
-import { MobileBottomNavigation } from "@/components/navigation/mobile-bottom-navigation";
+import { ResponsiveNavigation } from "@/components/navigation/responsive-navigation";
 import { MobileHeader } from "@/components/shell/mobile-header";
 import { OfflineBanner } from "@/components/shell/offline-banner";
 
 /**
  * The single responsive application shell (F008). Every authenticated route
- * renders inside it. Phase 1 renders the mobile chrome at all widths with a
- * constrained content column; the tablet rail (F113) and desktop sidebar
- * (F114/F115) swap in behind this same component in Phases 4–5 — exactly one
- * navigation pattern at a time (Decision D-004).
+ * renders inside it. Navigation is viewport-switched (D-004): bottom navigation
+ * below 768px, the tablet rail at ≥768px (F113); the desktop sidebar replaces
+ * the rail at ≥1024px in Phase 5. Content stays a single constrained column on
+ * mobile and gains width beside the rail on tablet.
  */
 export function ResponsiveAppShell({ children }: { children: React.ReactNode }) {
   return (
@@ -17,11 +17,13 @@ export function ResponsiveAppShell({ children }: { children: React.ReactNode }) 
       <SkipLink />
       <MobileHeader />
       <OfflineBanner />
-      <main id="main" className="pb-bottom-nav flex-1">
-        <div className="mx-auto w-full max-w-3xl px-4">{children}</div>
-      </main>
+      <div className="flex flex-1">
+        <ResponsiveNavigation />
+        <main id="main" className="pb-bottom-nav min-w-0 flex-1">
+          <div className="mx-auto w-full max-w-3xl px-4 md:max-w-4xl md:px-6">{children}</div>
+        </main>
+      </div>
       <CopilotLauncher />
-      <MobileBottomNavigation />
     </div>
   );
 }

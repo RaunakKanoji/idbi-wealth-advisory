@@ -78,6 +78,21 @@ gap; all routes exist on all surfaces.
 
 ---
 
+## D-007 — Tablet rail carries all destinations; rail serves desktop until Phase 5 (2026-07-13)
+
+**Status:** Accepted
+
+**Decision:** On tablet (≥768px) every destination sits directly on the
+navigation rail — there is no More sheet, unlike mobile where the bottom
+navigation caps at five entries with a More sheet (F108). This is an
+intentional mobile/tablet navigation difference (Agent rule 17): the rail has
+the vertical space, and one tap beats two. Compact rail labels ("Advice",
+"Docs", "Alerts") are presentation-only — accessible names keep the full
+labels, preserving parity of accessibility semantics. Interim: the rail also
+serves ≥1024px until the Phase 5 desktop sidebar (F115) replaces it there.
+
+---
+
 ## D-006 — In-memory demo store for customer edits (2026-07-13)
 
 **Status:** Accepted (hackathon scope)

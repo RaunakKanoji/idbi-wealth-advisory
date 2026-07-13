@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import type { ApiEnvelope, AssetClass, PortfolioData } from "@idbi/types";
+import { AllocationDonut } from "@/components/charts/allocation-donut";
 import { ErrorState } from "@/components/feedback/error-state";
 import { Skeleton } from "@/components/feedback/skeleton";
 import { ProgressBar } from "@/components/financial/progress-bar";
@@ -72,7 +73,10 @@ export function PortfolioScreen() {
 
       <section aria-label="Asset allocation" className="flex flex-col gap-3">
         <h2 className="text-sm font-semibold text-muted">How it's invested</h2>
-        <div className="flex flex-col gap-3 rounded-(--radius-card) border border-border bg-surface p-4">
+        <div className="rounded-(--radius-card) border border-border bg-surface p-4 md:grid md:grid-cols-[13rem_1fr] md:items-center md:gap-6">
+          {/* Expanded chart at ≥768px only — mobile keeps the simplified bars (F117). */}
+          <AllocationDonut slices={allocation.byClass} className="hidden md:flex" />
+          <div className="flex flex-col gap-3">
           {allocation.byClass.map((slice) => (
             <div key={slice.assetClass} className="flex flex-col gap-1.5">
               <div className="flex items-baseline justify-between gap-2 text-sm">
@@ -85,6 +89,7 @@ export function PortfolioScreen() {
               <ProgressBar value={slice.pct} label={`${CLASS_LABELS[slice.assetClass]}: ${slice.pct}%`} />
             </div>
           ))}
+          </div>
         </div>
       </section>
 

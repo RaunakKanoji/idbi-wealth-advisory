@@ -24,6 +24,8 @@ export interface NavDestination {
   href: string;
   label: string;
   icon: IconName;
+  /** Compact label for the tablet rail; accessible name stays `label` (parity). */
+  shortLabel?: string;
 }
 
 /** Mobile bottom navigation — exactly five entries (F108). */
@@ -34,15 +36,16 @@ export const primaryTabs: NavDestination[] = [
   { href: "/goals", label: "Goals", icon: "goals" },
 ];
 
-/** Destinations inside the mobile "More" sheet (F108). */
+/** Destinations inside the mobile "More" sheet (F108). On tablet these sit
+ *  directly on the navigation rail instead (Decision D-007). */
 export const moreDestinations: NavDestination[] = [
   { href: "/spending", label: "Spending", icon: "spending" },
   { href: "/portfolio", label: "Portfolio", icon: "portfolio" },
-  { href: "/recommendations", label: "Recommendations", icon: "recommendations" },
-  { href: "/simulator", label: "Simulator", icon: "simulator" },
-  { href: "/documents", label: "Documents", icon: "documents" },
+  { href: "/recommendations", label: "Recommendations", icon: "recommendations", shortLabel: "Advice" },
+  { href: "/simulator", label: "Simulator", icon: "simulator", shortLabel: "Simulate" },
+  { href: "/documents", label: "Documents", icon: "documents", shortLabel: "Docs" },
   { href: "/consent", label: "Consent", icon: "consent" },
-  { href: "/notifications", label: "Notifications", icon: "notifications" },
+  { href: "/notifications", label: "Notifications", icon: "notifications", shortLabel: "Alerts" },
   { href: "/profile", label: "Profile", icon: "profile" },
   { href: "/settings", label: "Settings", icon: "settings" },
 ];

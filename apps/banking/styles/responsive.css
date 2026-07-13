@@ -18,3 +18,12 @@ body {
 .readable {
   max-width: 70ch;
 }
+
+/* At ≥768px the bottom navigation gives way to the rail (F113/D-004), so
+   everything offset by the nav height — main padding, the Copilot launcher,
+   toasts — collapses to safe-area-only spacing automatically. */
+@media (min-width: 768px) {
+  :root {
+    --bottom-nav-height: 0px;
+  }
+}

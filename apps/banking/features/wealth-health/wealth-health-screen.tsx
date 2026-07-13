@@ -70,6 +70,7 @@ export function WealthHealthScreen() {
 
       <section aria-label="Score pillars" className="flex flex-col gap-3">
         <h2 className="text-sm font-semibold text-muted">What drives your score</h2>
+        <div className="flex flex-col gap-3 md:grid md:grid-cols-2 md:items-start">
         {pillars.map((pillar) => (
           <div
             key={pillar.id}
@@ -92,6 +93,7 @@ export function WealthHealthScreen() {
             </p>
           </div>
         ))}
+        </div>
       </section>
 
       <Link href="/copilot" className="flex min-h-11 items-center text-sm font-medium text-primary">

@@ -67,17 +67,20 @@ export default function OverviewPage() {
         </div>
       </section>
 
-      <section aria-label="Top recommendations" className="flex flex-col gap-2">
-        <h2 className="text-sm font-semibold text-muted">Top recommendations</h2>
-        {/* At most three on the overview; full list lives on /recommendations (F106). */}
-        <div className="flex flex-col gap-3">
-          {topRecommendations.slice(0, 3).map((recommendation) => (
-            <RecommendationCard key={recommendation.id} recommendation={recommendation} />
-          ))}
-        </div>
-      </section>
+      {/* Tablet uses the width for comparison: recommendations beside sources (F113). */}
+      <div className="flex flex-col gap-6 md:grid md:grid-cols-2 md:items-start">
+        <section aria-label="Top recommendations" className="flex flex-col gap-2">
+          <h2 className="text-sm font-semibold text-muted">Top recommendations</h2>
+          {/* At most three on the overview; full list lives on /recommendations (F106). */}
+          <div className="flex flex-col gap-3">
+            {topRecommendations.slice(0, 3).map((recommendation) => (
+              <RecommendationCard key={recommendation.id} recommendation={recommendation} />
+            ))}
+          </div>
+        </section>
 
-      <DataSourceStatusList sources={data.sources} />
+        <DataSourceStatusList sources={data.sources} />
+      </div>
     </div>
   );
 }

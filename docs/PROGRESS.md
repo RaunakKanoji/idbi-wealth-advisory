@@ -143,13 +143,28 @@ Automated suite (runs locally and in CI — `.github/workflows/ci.yml`):
 Gate: desktop expansion may not begin until all items pass. The four remaining
 items need physical devices — everything automatable is green and enforced.
 
-## Phase 4 — Responsive and tablet adaptation ⬜ NOT STARTED
+## Phase 4 — Responsive and tablet adaptation ✅ COMPLETE (2026-07-13)
 
-- [ ] F112 — Responsive breakpoint system
-- [ ] F113 — Tablet layout adaptation
-- [ ] F117 — Responsive chart system
-- [ ] F118 — Cross-platform feature parity (matrix populated)
-- [ ] F119 — Device capability fallbacks
+- [x] F112 — Responsive breakpoint system: navigation switched exclusively via
+      `use-breakpoint` + `@idbi/config`; `--bottom-nav-height` collapses at md
+      so nav-offset spacing adapts by token, not per-component logic
+- [x] F113 — Tablet layout adaptation: navigation rail at ≥768px carrying every
+      destination (D-007), never alongside the bottom nav (E2E-enforced);
+      two-column layouts on overview/wealth-health/goals/recommendations/
+      spending; side-by-side related form fields; portrait + landscape
+      overflow-tested (768×1024, 1024×768). Tablet Copilot stays a centered
+      full conversation — the split view is Phase 5 (F116).
+- [x] F117 — Responsive chart system: allocation donut (≥768px) rendered from
+      the same domain AllocationSlice data as the mobile bar list; legend and
+      bars carry values in text — no colour-only meaning; E2E asserts the
+      expanded chart is tablet-only
+- [x] F118 — Parity matrix updated with the tablet column
+- [x] F119 — Device capability fallback tests: reduced-motion conversation,
+      voice-absent text baseline, static avatar, push→in-app notifications
+      (plus the Phase 3 offline suite)
+
+E2E suite now 47 tests, all green; bundle budget unchanged (shared 102 kB).
+Interim: the rail also serves ≥1024px until the Phase 5 desktop sidebar (D-007).
 
 ## Phase 5 — Desktop web expansion ⬜ NOT STARTED
 

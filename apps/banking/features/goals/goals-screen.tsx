@@ -52,6 +52,7 @@ export function GoalsScreen() {
           Add goal
         </Link>
       </div>
+      <div className="flex flex-col gap-4 md:grid md:grid-cols-2 md:items-start">
       {goals.map((goal) => {
         const projection = projections.find((p) => p.goalId === goal.id);
         if (!projection) return null;
@@ -110,6 +111,7 @@ export function GoalsScreen() {
           </article>
         );
       })}
+      </div>
       <p className="text-xs text-muted">
         Projections assume each goal's expected return, compounded monthly. Try what-if changes in
         the Simulator without touching your real goals.
