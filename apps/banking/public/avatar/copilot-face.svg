@@ -1,29 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
   <!-- ear pods -->
-  <rect x="1" y="48" width="12" height="28" rx="6" fill="#14756a"/>
-  <rect x="107" y="48" width="12" height="28" rx="6" fill="#14756a"/>
+  <rect x="0" y="47" width="13" height="32" rx="6.5" fill="#14756a"/>
+  <rect x="3" y="54" width="7" height="18" rx="3.5" fill="#5fc0b4"/>
+  <rect x="107" y="47" width="13" height="32" rx="6.5" fill="#14756a"/>
+  <rect x="110" y="54" width="7" height="18" rx="3.5" fill="#5fc0b4"/>
+
   <!-- head shell -->
-  <ellipse cx="60" cy="61" rx="51" ry="49" fill="#ffffff" stroke="#d7e3e0" stroke-width="2"/>
-  <!-- cap -->
-  <path d="M15 46 C22 18 98 18 105 46 C82 35 38 35 15 46 Z" fill="#14756a"/>
-  <!-- logo -->
-  <circle cx="60" cy="27" r="9" fill="#ee7a23"/>
-  <circle cx="60" cy="23.5" r="1.8" fill="#ffffff"/>
-  <rect x="58.4" y="26" width="3.2" height="7" rx="1.6" fill="#ffffff"/>
+  <ellipse cx="60" cy="62" rx="54" ry="50" fill="#ffffff" stroke="#d7e3e0" stroke-width="2.5"/>
+  <!-- teal cap: solid across the top of the helmet -->
+  <path d="M8 52 C13 -2 107 -2 112 52 C85 37 35 37 8 52 Z" fill="#14756a"/>
+  <!-- forehead logo -->
+  <circle cx="60" cy="21" r="9.5" fill="#ee7a23"/>
+  <circle cx="60" cy="17.2" r="2" fill="#ffffff"/>
+  <rect x="58.2" y="19.8" width="3.6" height="7.4" rx="1.8" fill="#ffffff"/>
+
   <!-- visor -->
-  <rect x="21" y="42" width="78" height="54" rx="25" fill="#17332e"/>
+  <rect x="20" y="36" width="80" height="62" rx="28" fill="#16302c"/>
   <!-- eyebrows -->
-  <path d="M36 55 Q44 51 52 55" stroke="#4a6a63" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <path d="M68 55 Q76 51 84 55" stroke="#4a6a63" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M34 55 Q43 48 52 55" stroke="#4a6a63" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M68 55 Q77 48 86 55" stroke="#4a6a63" stroke-width="3.5" fill="none" stroke-linecap="round"/>
   <!-- eyes -->
-  <ellipse cx="44" cy="68" rx="8.5" ry="9.5" fill="#ffffff"/>
-  <circle cx="44" cy="69" r="5.2" fill="#2ba193"/>
-  <circle cx="44" cy="69" r="2.4" fill="#12211e"/>
-  <circle cx="46" cy="66.5" r="1.5" fill="#ffffff"/>
-  <ellipse cx="76" cy="68" rx="8.5" ry="9.5" fill="#ffffff"/>
-  <circle cx="76" cy="69" r="5.2" fill="#2ba193"/>
-  <circle cx="76" cy="69" r="2.4" fill="#12211e"/>
-  <circle cx="78" cy="66.5" r="1.5" fill="#ffffff"/>
+  <g>
+    <ellipse cx="43" cy="71" rx="10.5" ry="12" fill="#ffffff"/>
+    <circle cx="43" cy="72" r="7.2" fill="#2ba193"/>
+    <circle cx="43" cy="72" r="3.6" fill="#0e1f1c"/>
+    <circle cx="45.8" cy="68" r="2" fill="#ffffff"/>
+    <circle cx="39.8" cy="74.8" r="1" fill="#ffffff"/>
+  </g>
+  <g>
+    <ellipse cx="77" cy="71" rx="10.5" ry="12" fill="#ffffff"/>
+    <circle cx="77" cy="72" r="7.2" fill="#2ba193"/>
+    <circle cx="77" cy="72" r="3.6" fill="#0e1f1c"/>
+    <circle cx="79.8" cy="68" r="2" fill="#ffffff"/>
+    <circle cx="73.8" cy="74.8" r="1" fill="#ffffff"/>
+  </g>
   <!-- smile -->
-  <path d="M49 82 Q60 90 71 82" stroke="#ffffff" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M47 86 Q60 96 73 86" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round"/>
 </svg>
