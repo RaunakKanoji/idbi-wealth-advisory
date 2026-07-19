@@ -46,6 +46,7 @@ charts; the desktop LAYOUT_VARIANT arrives in Phase 5) · — not built yet.
 | Documents / advisory history | ✅ | ✅ | base | FULL_PARITY (required) | Preview/download pending storage integration (all surfaces equally) |
 | Notifications | ✅ | ✅ | base | FULL_PARITY | In-app feed; push = CAPABILITY_FALLBACK to in-app (F119) |
 | Settings | ✅ | ✅ | base | FULL_PARITY | Includes sign-out and accessibility status |
+| Public app prototype preview | ✅ | ✅ | base | LAYOUT_VARIANT | Link to externally hosted Appetize prototype on the public landing page |
 
 ## Verification
 

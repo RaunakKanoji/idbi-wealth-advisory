@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PrototypePreview } from "@/components/prototype/prototype-preview";
 
 export default function LandingPage() {
   return (
@@ -15,8 +16,9 @@ export default function LandingPage() {
         href="/sign-in"
         className="flex min-h-12 w-full items-center justify-center rounded-(--radius-control) bg-primary px-6 text-base font-semibold text-white active:bg-primary-strong"
       >
-        Sign in
+        View app demo
       </Link>
+      <PrototypePreview />
       <p className="text-xs text-muted">
         Hackathon demo environment. No real customer data is used.
       </p>
