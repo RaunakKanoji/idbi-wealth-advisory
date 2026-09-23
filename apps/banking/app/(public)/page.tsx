@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PrototypePreview } from "@/components/prototype/prototype-preview";
+import { appLinks } from "@/lib/app-links";
 
 export default function LandingPage() {
   return (
@@ -13,8 +14,8 @@ export default function LandingPage() {
         </p>
       </div>
       <Link
-        href="/sign-in"
-        className="flex min-h-12 w-full items-center justify-center rounded-(--radius-control) bg-primary px-6 text-base font-semibold text-white active:bg-primary-strong"
+        href={appLinks.demo}
+        className="flex min-h-12 w-full items-center justify-center rounded-(--radius-control) bg-primary px-6 text-base font-semibold text-white shadow-sm transition-[background-color,box-shadow,transform] duration-200 ease-out hover:bg-primary-strong hover:shadow-md active:translate-y-px focus-visible:ring-2 focus-visible:ring-info focus-visible:ring-offset-2"
       >
         View app demo
       </Link>
