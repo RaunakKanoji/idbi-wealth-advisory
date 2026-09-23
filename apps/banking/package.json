@@ -8,7 +8,7 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test",
-    "build:budget": "set -o pipefail && next build | node scripts/check-bundle-budget.mjs"
+    "build:budget": "bash -o pipefail -c 'next build | node scripts/check-bundle-budget.mjs'"
   },
   "dependencies": {
     "@idbi/analytics": "*",
